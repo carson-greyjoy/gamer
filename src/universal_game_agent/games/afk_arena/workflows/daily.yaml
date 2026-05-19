@@ -1,0 +1,101 @@
+{
+  "game": "afk_arena",
+  "name": "daily",
+  "steps": [
+    {
+      "name": "login",
+      "description": "Enter the game and wait for the home page.",
+      "page": "launch",
+      "actions": [
+        {
+          "type": "assert_page",
+          "target": "launch"
+        },
+        {
+          "type": "click",
+          "target": "start_game"
+        },
+        {
+          "type": "wait",
+          "seconds": 8
+        }
+      ]
+    },
+    {
+      "name": "collect_mail",
+      "description": "Open mailbox and collect all available rewards.",
+      "page": "mailbox",
+      "actions": [
+        {
+          "type": "click",
+          "target": "mail",
+          "position": [1180, 120]
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        },
+        {
+          "type": "click",
+          "target": "collect_all"
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        }
+      ]
+    },
+    {
+      "name": "daily_reward",
+      "description": "Collect daily quest and event rewards.",
+      "page": "quests",
+      "actions": [
+        {
+          "type": "click",
+          "target": "quests",
+          "position": [1110, 480]
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        },
+        {
+          "type": "click",
+          "target": "daily_tab"
+        },
+        {
+          "type": "click",
+          "target": "claim_all"
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        }
+      ]
+    },
+    {
+      "name": "idle_claim",
+      "description": "Collect idle chest rewards from the home page.",
+      "page": "idle_reward",
+      "actions": [
+        {
+          "type": "click",
+          "target": "idle_chest",
+          "position": [640, 560]
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        },
+        {
+          "type": "click",
+          "target": "claim"
+        },
+        {
+          "type": "wait",
+          "seconds": 2
+        }
+      ]
+    }
+  ]
+}
