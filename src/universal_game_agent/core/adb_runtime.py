@@ -10,9 +10,17 @@ from universal_game_agent.core.runtime import RuntimeContext
 class ADBRuntime(RuntimeAdapter):
     """Android runtime backed by the adb command line."""
 
-    def __init__(self, context: RuntimeContext, adb_path: str = "adb") -> None:
+    def __init__(
+        self,
+        context: RuntimeContext,
+        adb_path: str = "adb",
+        adb_host: str | None = None,
+        adb_port: int | None = None,
+    ) -> None:
         super().__init__(context)
         self.adb_path = adb_path
+        self.adb_host = adb_host
+        self.adb_port = adb_port
 
     def screenshot(self) -> Path:
         output = Path("artifacts") / "adb_screenshot.png"
@@ -42,6 +50,10 @@ class ADBRuntime(RuntimeAdapter):
 
     def _run_adb(self, *args: str, capture_output: bool = False) -> bytes:
         command = [self.adb_path]
+        if self.adb_host:
+            command.extend(["-H", self.adb_host])
+        if self.adb_port:
+            command.extend(["-P", str(self.adb_port)])
         if self.context.device_id:
             command.extend(["-s", self.context.device_id])
         command.extend(args)

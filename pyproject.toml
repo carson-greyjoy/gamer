@@ -13,6 +13,7 @@ dev = [
 
 [project.scripts]
 uga = "universal_game_agent.main:main"
+uga-adb-doctor = "universal_game_agent.adb_doctor:main"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

@@ -6,10 +6,15 @@ from universal_game_agent.core.runtime import RuntimeContext
 from universal_game_agent.core.runtime import StubRuntime
 
 
-def create_runtime(platform: str, device_id: str | None = None) -> RuntimeAdapter:
+def create_runtime(
+    platform: str,
+    device_id: str | None = None,
+    adb_host: str | None = None,
+    adb_port: int | None = None,
+) -> RuntimeAdapter:
     context = RuntimeContext(platform=platform, device_id=device_id)
     if platform == "adb":
-        return ADBRuntime(context)
+        return ADBRuntime(context, adb_host=adb_host, adb_port=adb_port)
     if platform in {"stub", "windows", "emulator"}:
         return StubRuntime(context)
     raise ValueError(f"Unsupported platform: {platform}")

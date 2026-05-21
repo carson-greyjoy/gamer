@@ -19,6 +19,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workflow", default="daily")
     parser.add_argument("--platform", default="stub")
     parser.add_argument("--device-id", default=None)
+    parser.add_argument("--adb-host", default=None)
+    parser.add_argument("--adb-port", type=int, default=None)
     return parser.parse_args()
 
 
@@ -33,7 +35,12 @@ def main() -> None:
     workflow_path = resolve_workflow_path(args.game, args.workflow)
     workflow = load_workflow(workflow_path)
 
-    runtime = create_runtime(platform=args.platform, device_id=args.device_id)
+    runtime = create_runtime(
+        platform=args.platform,
+        device_id=args.device_id,
+        adb_host=args.adb_host,
+        adb_port=args.adb_port,
+    )
     toolbelt = Toolbelt(runtime=runtime)
     planner = RulePlanner()
     executor = WorkflowExecutor(toolbelt=toolbelt, planner=planner, game=plugin)
